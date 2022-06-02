@@ -8,10 +8,11 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Doughnut } from 'react-chartjs-2';
 
-import { usePessoalCalc } from "@/hooks/usePessoalCalc";
+import { usePessoalSex } from "@/hooks/usePessoalSex";
 
 type Data = {
   vl1: string;
@@ -24,18 +25,13 @@ type Data = {
 }
 
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  ArcElement,
   Tooltip,
   Legend
 );
 
-
-
-export function PessoalCalc() {
-  const { pessoalCalc } = usePessoalCalc<Data[]>('/api/pessoal_calc');
+export function PessoalSex() {
+  const { sexPessoal } = usePessoalSex<Data[]>('/api/pessoal_sex');
 
   const options = {
     responsive: true,
@@ -45,39 +41,41 @@ export function PessoalCalc() {
       },
       title: {
         display: true,
-        text: 'PESSOAL_CALC',
+        text: 'PESSOAL_SEX',
       },
     },
   };
 
-  const labels = pessoalCalc?.map(item => item.vl7);
+  const labels = sexPessoal?.map(item => item.vl1);
 
   const data = {
     labels,
     datasets: [
       {
         label: 'VL1',
-        data: pessoalCalc?.map(item => item.vl1),
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-      {
-        label: 'VL2',
-        data: pessoalCalc?.map(item => item.vl2),
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
-      },
-      {
-        label: 'VL3',
-        data: pessoalCalc?.map(item => item.vl3),
-        backgroundColor: 'rgba(53, 223, 235, 0.5)',
+        data: sexPessoal?.map(item => item.vl2),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(53, 162, 235, 0.5)',
+          'rgba(53, 223, 235, 0.5)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(53, 162, 235, 1)',
+          'rgba(53, 223, 235, 1)'
+        ],
+        borderWidth: 1
       },
     ],
   };
 
   return (
     <Container>
-      <Bar
+      <Doughnut
         data={data}
         options={options}
+        width='50%'
+        height='50%'
       />
     </Container>
   );
