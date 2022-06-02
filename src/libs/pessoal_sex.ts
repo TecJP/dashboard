@@ -1,8 +1,3 @@
-import axios from 'axios'
+import { api } from "./api";
 
-export const api_pes_sex = axios.create({
-  baseURL: 'https://api.centi.com.br/rest/getdata/',
-  headers: {
-
-  }
-});
+export const pessoal_sex = api.get('go/itumbiara/9F9EB943822E4504B15E7F292DAEFF17/PESSOAL_SEX');
