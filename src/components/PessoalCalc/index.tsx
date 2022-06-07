@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import { Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
   Title,
   Tooltip,
   Legend,
+  PointElement,
+  LineElement,
+  Filler,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 import { usePessoalCalc } from "@/hooks/usePessoalCalc";
 
@@ -26,13 +27,13 @@ type Data = {
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler,
 );
-
-
 
 export function PessoalCalc() {
   const { pessoalCalc } = usePessoalCalc<Data[]>('/api/pessoal_calc');
@@ -41,11 +42,11 @@ export function PessoalCalc() {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: 'bottom' as const,
       },
       title: {
         display: true,
-        text: 'PESSOAL_CALC',
+        text: 'Gasto com Pessoal',
       },
     },
   };
@@ -56,26 +57,38 @@ export function PessoalCalc() {
     labels,
     datasets: [
       {
-        label: 'VL1',
-        data: pessoalCalc?.map(item => item.vl1),
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        label: 'VL3',
+        data: pessoalCalc?.map(item => item.vl3),
+        lineTension: 0.15,
+        fill: true,
+        radius: 0,
+        backgroundColor: 'rgba(53, 223, 235, 0.5)',
+        borderColor: 'rgba(53, 223, 235, 1)',
       },
       {
         label: 'VL2',
         data: pessoalCalc?.map(item => item.vl2),
+        lineTension: 0.15,
+        fill: true,
+        radius: 0,
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        borderColor: 'rgba(53, 162, 235, 1)',
       },
       {
-        label: 'VL3',
-        data: pessoalCalc?.map(item => item.vl3),
-        backgroundColor: 'rgba(53, 223, 235, 0.5)',
+        label: 'VL1',
+        data: pessoalCalc?.map(item => item.vl1),
+        lineTension: 0.15,
+        fill: true,
+        radius: 0,
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: 'rgba(255, 99, 132, 1)',
       },
     ],
   };
 
   return (
     <Container>
-      <Bar
+      <Line
         data={data}
         options={options}
       />
