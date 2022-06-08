@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -51,13 +51,13 @@ export function PessoalCalc() {
     },
   };
 
-  const labels = pessoalCalc?.map(item => item.vl7);
+  const labels = pessoalCalc?.map(item => item.vl7.toLowerCase());
 
   const data = {
     labels,
     datasets: [
       {
-        label: 'VL3',
+        label: 'Liquido',
         data: pessoalCalc?.map(item => item.vl3),
         lineTension: 0.15,
         fill: true,
@@ -66,7 +66,7 @@ export function PessoalCalc() {
         borderColor: 'rgba(53, 223, 235, 1)',
       },
       {
-        label: 'VL2',
+        label: 'Desconto',
         data: pessoalCalc?.map(item => item.vl2),
         lineTension: 0.15,
         fill: true,
@@ -75,7 +75,7 @@ export function PessoalCalc() {
         borderColor: 'rgba(53, 162, 235, 1)',
       },
       {
-        label: 'VL1',
+        label: 'Proventos',
         data: pessoalCalc?.map(item => item.vl1),
         lineTension: 0.15,
         fill: true,
@@ -87,11 +87,11 @@ export function PessoalCalc() {
   };
 
   return (
-    <Container>
+    <Flex bg="#fff" p="6" mr="4" w="full" h="100%" rounded="15" shadow="md" >
       <Line
         data={data}
         options={options}
       />
-    </Container>
+    </Flex>
   );
 }
