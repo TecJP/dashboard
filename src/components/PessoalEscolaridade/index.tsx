@@ -1,9 +1,7 @@
 import {
-  Box,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
@@ -27,8 +25,6 @@ type ApiData = {
 
 export function PessoalEscolaridade() {
   const { pessoalEscolaridade } = usePessoalEscolaridade<ApiData[]>('/api/pessoal_escolaridade');
-  const escolaridadeMasc = pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Mas");
-  const escolaridadeFem = pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Fem");
   const escolaridadeInst = pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Inst");
 
   console.log(pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Mas"));

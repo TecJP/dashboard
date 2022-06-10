@@ -24,14 +24,14 @@ const Home: NextPage = () => {
         >
         </Flex>
         <Flex
-          w="80%"
+          w="85%"
           flexDir="column"
           ml="0"
           mt="0"
         >
           <Flex
             w="100%"
-            h="20%"
+            h="15%"
             flexDir="row"
             mb="2"
           >
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
           </Flex>
           <Flex
             w="100%"
-            h="80%"
+            h="85%"
             flexDir="row"
           >
             <PessoalCalc />
