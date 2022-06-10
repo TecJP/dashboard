@@ -1,18 +1,21 @@
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Flex,
+} from '@chakra-ui/react';
 
 import { usePessoalEscolaridade } from "@/hooks/usePessoalEscolaridade";
-import { Box, Heading, HStack, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 
-type Data = {
+type ApiData = {
+  Nome_Grafico: string;
   vl1: string;
   vl2: string;
   vl3: string;
@@ -22,69 +25,37 @@ type Data = {
   vl7: string;
 }
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
 export function PessoalEscolaridade() {
-  const { pessoalEscolaridade } = usePessoalEscolaridade<Data[]>('/api/pessoal_escolaridade');
+  const { pessoalEscolaridade } = usePessoalEscolaridade<ApiData[]>('/api/pessoal_escolaridade');
+  const escolaridadeMasc = pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Mas");
+  const escolaridadeFem = pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Fem");
+  const escolaridadeInst = pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Inst");
 
-  // const options = {
-  //   elements: {
-  //     bar: {
-  //       borderWidth: 2,
-  //     },
-  //   },
-  //   responsive: true,
-  //   plugins: {
-  //     legend: {
-  //       position: 'top' as const,
-  //     },
-  //     title: {
-  //       display: true,
-  //       text: 'Nível de Escolaridade',
-  //     },
-  //   },
-  // };
-
-  // const labels = pessoalEscolaridade?.map(item => item.vl2);
-
-  // const data = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       label: `Quantidade`,
-  //       data: pessoalEscolaridade?.map(item => item.vl3),
-  //       backgroundColor: 'rgba(53, 162, 235, 0.5)',
-  //       borderColor: 'rgba(53, 162, 235, 1)'
-  //     },
-  //   ],
-  // };
-
-  console.log(pessoalEscolaridade?.map(item => {
-    return {
-      'nível': item.vl2,
-      'qtd': item.vl3
-    }
-  }));
-
-  console.log(pessoalEscolaridade);
+  console.log(pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Mas"));
 
   return (
-    <HStack spacing={8}>
-      {/* {pessoalEscolaridade?.map(item => {
-        return (
-          <Box key={item.vl2}>
-            <Heading size="md">{item.vl2}</Heading>
-            <Text>{item.vl3}</Text>
-          </Box>
-        )
-      })} */}
-    </HStack>
+    <Flex bg="#fff" p="4" ml="1" flexDir="row" w="100%" h="100%" rounded="15" shadow="md" >
+      <TableContainer m="4">
+        <Table size="sm" variant='striped' colorScheme='teal'>
+          <TableCaption>Nível de Escolaridade Total</TableCaption>
+          <Thead>
+            <Tr>
+              <Th>Nível</Th>
+              <Th>QTD</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {escolaridadeInst?.map(item => {
+              return (
+                <Tr key="item.vl2">
+                  <Td>{item.vl2}</Td>
+                  <Td>{item.vl3}</Td>
+                </Tr>
+              )
+            })}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </Flex>
   );
 }

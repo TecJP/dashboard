@@ -1,4 +1,4 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Box, Container, Flex } from "@chakra-ui/react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -87,11 +87,11 @@ export function PessoalCalc() {
   };
 
   return (
-    <Flex bg="#fff" p="6" mr="4" w="full" h="100%" rounded="15" shadow="md" >
+    <Box bg="#fff" p="6" mr="1" w="210%" h="100%" rounded="15" shadow="md" >
       <Line
         data={data}
         options={options}
       />
-    </Flex>
+    </Box>
   );
 }

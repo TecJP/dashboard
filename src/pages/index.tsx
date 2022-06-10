@@ -2,48 +2,48 @@ import type { NextPage } from 'next'
 import { Container, Flex } from '@chakra-ui/react';
 import { PessoalCalc } from '@/components/PessoalCalc';
 import { PessoalSex } from '@/components/PessoalSex';
+import { PessoalEscolaridade } from '@/components/PessoalEscolaridade';
 
 const Home: NextPage = () => {
 
   return (
-    <Container minW='100vw' minH='100vh' p="0" bg="#dedede" overflow="hidden">
+    <Container minW='100vw' minH='100vh' p="0" bg="gray.50" >
       <Flex
         maxW="2000px"
         flexDir="row"
         h="100vh"
-        p="0"
+        p="2"
       >
         <Flex
-          w="20%"
+          w="15%"
+          h="100%"
           bg="#fff"
-          m="4"
           rounded="15"
           shadow="md"
+          mr="2"
         >
         </Flex>
         <Flex
           w="80%"
           flexDir="column"
-          m="4"
           ml="0"
           mt="0"
         >
           <Flex
-            w="full"
-            h="100%"
+            w="100%"
+            h="20%"
             flexDir="row"
-            m="2"
-            mt="4"
+            mb="2"
           >
             <PessoalSex />
           </Flex>
           <Flex
-            w="full"
-            h="100%"
-            flexDir="column"
-            m="2"
+            w="100%"
+            h="80%"
+            flexDir="row"
           >
             <PessoalCalc />
+            <PessoalEscolaridade />
           </Flex>
         </Flex>
       </Flex>
