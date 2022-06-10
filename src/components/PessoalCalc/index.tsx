@@ -87,7 +87,7 @@ export function PessoalCalc() {
   };
 
   return (
-    <Box bg="#fff" p="6" mr="1" w="210%" h="100%" rounded="15" shadow="md" >
+    <Box bg="#fff" p="6" mr="1" w="240%" h="100%" rounded="15" shadow="md" >
       <Line
         data={data}
         options={options}
