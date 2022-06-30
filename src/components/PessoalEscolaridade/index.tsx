@@ -43,7 +43,7 @@ export function PessoalEscolaridade() {
           <Tbody>
             {escolaridadeInst?.map(item => {
               return (
-                <Tr key="item.vl2">
+                <Tr key={item.vl2}>
                   <Td>{item.vl2}</Td>
                   <Td>{item.vl3}</Td>
                 </Tr>

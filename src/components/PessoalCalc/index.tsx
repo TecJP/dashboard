@@ -1,16 +1,5 @@
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  Title,
-  Tooltip,
-  Legend,
-  PointElement,
-  LineElement,
-  Filler,
-} from 'chart.js';
 
 import { usePessoalCalc } from "@/hooks/usePessoalCalc";
 import { FormatCurrency } from "@/utils/FormatCurrency";
@@ -27,17 +16,6 @@ type Data = {
   vl6: string;
   vl7: string;
 }
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-);
 
 export function PessoalCalc() {
   const { pessoalCalc } = usePessoalCalc<Data[]>('/api/pessoal_calc');
@@ -77,7 +55,7 @@ export function PessoalCalc() {
       <Heading fontSize="35px" mt="2" mb="2"> Gastos em Julho </Heading>
       {pessoalCalcFiltered?.map(item => {
         return (
-          <Flex w="100%" h="20%" direction="row">
+          <Flex key={item.vl7} w="100%" h="20%" direction="row">
             <Box
               key={item.cp1}
               w="100%"
@@ -131,15 +109,15 @@ export function PessoalCalc() {
                 >
                   {resultsBackMonth?.map(result => {
                     return (
-                      FormatCurrency(result.proventos)
+                      `${FormatCurrency(result.proventos)}`
                     )
                   })}
                   {resultsBackMonth?.map(result => {
                     return (
                       Number(item.vl1).toFixed(2) < Number(result.proventos).toFixed(2) ?
-                        <ArrowUpIcon w={5} h={5} m="0.5" p="0" color="green" />
+                        <ArrowUpIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="green" />
                         :
-                        <ArrowDownIcon w={5} h={5} m="0.5" p="0" color="red" />
+                        <ArrowDownIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="red" />
                     )
                   })}
                 </Text>
@@ -198,15 +176,15 @@ export function PessoalCalc() {
                 >
                   {resultsBackMonth?.map(result => {
                     return (
-                      FormatCurrency(result.descontos)
+                      `${FormatCurrency(result.descontos)}`
                     )
                   })}
                   {resultsBackMonth?.map(result => {
                     return (
                       Number(item.vl2).toFixed(2) < Number(result.descontos).toFixed(2) ?
-                        <ArrowUpIcon w={5} h={5} m="0.5" p="0" color="green" />
+                        <ArrowUpIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="green" />
                         :
-                        <ArrowDownIcon w={5} h={5} m="0.5" p="0" color="red" />
+                        <ArrowDownIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="red" />
                     )
                   })}
                 </Text>
@@ -265,15 +243,15 @@ export function PessoalCalc() {
                 >
                   {resultsBackMonth?.map(result => {
                     return (
-                      FormatCurrency(result.liquido)
+                      `${FormatCurrency(result.liquido)}`
                     )
                   })}
                   {resultsBackMonth?.map(result => {
                     return (
                       Number(item.vl3).toFixed(2) < Number(result.liquido).toFixed(2) ?
-                        <ArrowUpIcon w={5} h={5} m="0.5" p="0" color="green" />
+                        <ArrowUpIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="green" />
                         :
-                        <ArrowDownIcon w={5} h={5} m="0.5" p="0" color="red" />
+                        <ArrowDownIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="red" />
                     )
                   })}
                 </Text>
