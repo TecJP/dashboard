@@ -1,8 +1,7 @@
-import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
-import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
+import { Flex, Heading } from "@chakra-ui/react";
 
 import { usePessoalCalc } from "@/hooks/usePessoalCalc";
-import { FormatCurrency } from "@/utils/FormatCurrency";
+import { Card } from "../Card";
 
 type Data = {
   cp1: string;
@@ -38,8 +37,6 @@ export function PessoalCalc() {
     }
   });
 
-  // console.log(Number(resultsBackMonth[0]?.liquido).toFixed(2) < Number(pessoalCalcFiltered[0]?.vl3).toFixed(2));
-
   return (
     <Flex
       direction="column"
@@ -47,7 +44,7 @@ export function PessoalCalc() {
       bg="#fff"
       p="6"
       mr="1"
-      w="240%"
+      w={{ md: "65%", lg: "65%", xl: "70%" }}
       h="100%"
       rounded="15"
       shadow="md"
@@ -55,209 +52,33 @@ export function PessoalCalc() {
       <Heading fontSize="35px" mt="2" mb="2"> Gastos em Julho </Heading>
       {pessoalCalcFiltered?.map(item => {
         return (
-          <Flex key={item.vl7} w="100%" h="20%" direction="row">
-            <Box
-              key={item.cp1}
-              w="100%"
-              bg="#fff"
-              boxShadow="md"
-              rounded="15"
-              overflow="hidden"
-              mb="2"
-              mr="2"
-              display="flex"
-              flexDirection="row"
-              justifyContent="space-around"
-            >
-              <Box
-                bg="teal.300"
-                w="0.5rem"
-                m="0"
-                p="0"
-              >
-              </Box>
-              <Flex w="100%" mt="2" mb="2" direction="column">
-                <Heading
-                  pr="4"
-                  pl="4"
-                  fontSize="25px"
-                  fontWeight="500"
-                >
-                  Valor dos Proventos
-                </Heading>
-                <Text
-                  pr="4"
-                  pl="4"
-                  fontSize="30px"
-                  fontWeight="500"
-                >
-                  {FormatCurrency(item.vl1)}
-                </Text>
-                <Text
-                  pr="4"
-                  pl="4"
-                  fontSize="15px"
-                  fontWeight="500"
-                >
-                  Mês anterior
-                </Text>
-                <Text
-                  pr="4"
-                  pl="4"
-                  display="flex"
-                  alignItems="center"
-                >
-                  {resultsBackMonth?.map(result => {
-                    return (
-                      `${FormatCurrency(result.proventos)}`
-                    )
-                  })}
-                  {resultsBackMonth?.map(result => {
-                    return (
-                      Number(item.vl1).toFixed(2) < Number(result.proventos).toFixed(2) ?
-                        <ArrowUpIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="green" />
-                        :
-                        <ArrowDownIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="red" />
-                    )
-                  })}
-                </Text>
+          resultsBackMonth?.map(results => {
+            return (
+              <Flex w="100%" key={item.vl7} direction="row">
+                <Card
+                  key={item.cp1}
+                  title="Valor dos Provendos"
+                  amount={item.vl1}
+                  description="Mês Anterior"
+                  lastMonthAmount={results.proventos}
+                />
+                <Card
+                  key={item.cp2}
+                  title="Valor dos Descontos"
+                  amount={item.vl2}
+                  description="Mês Anterior"
+                  lastMonthAmount={results.descontos}
+                />
+                <Card
+                  key={item.cp3}
+                  title="Valor Liquido"
+                  amount={item.vl3}
+                  description="Mês Anterior"
+                  lastMonthAmount={results.liquido}
+                />
               </Flex>
-            </Box>
-            <Box
-              key={item.cp2}
-              w="100%"
-              bg="#fff"
-              boxShadow="md"
-              rounded="15"
-              overflow="hidden"
-              mb="2"
-              mr="2"
-              display="flex"
-              flexDirection="row"
-              justifyContent="space-around"
-            >
-              <Box
-                bg="teal.300"
-                w="0.5rem"
-                m="0"
-                p="0"
-              >
-              </Box>
-              <Flex w="100%" mt="2" mb="2" direction="column">
-                <Heading
-                  pr="4"
-                  pl="4"
-                  fontSize="25px"
-                  fontWeight="500"
-                >
-                  Valor dos Descontos
-                </Heading>
-                <Text
-                  pr="4"
-                  pl="4"
-                  fontSize="30px"
-                  fontWeight="500"
-                >
-                  {FormatCurrency(item.vl2)}
-                </Text>
-                <Text
-                  pr="4"
-                  pl="4"
-                  fontSize="15px"
-                  fontWeight="500"
-                >
-                  Mês anterior
-                </Text>
-                <Text
-                  pr="4"
-                  pl="4"
-                  display="flex"
-                  alignItems="center"
-                >
-                  {resultsBackMonth?.map(result => {
-                    return (
-                      `${FormatCurrency(result.descontos)}`
-                    )
-                  })}
-                  {resultsBackMonth?.map(result => {
-                    return (
-                      Number(item.vl2).toFixed(2) < Number(result.descontos).toFixed(2) ?
-                        <ArrowUpIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="green" />
-                        :
-                        <ArrowDownIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="red" />
-                    )
-                  })}
-                </Text>
-              </Flex>
-            </Box>
-            <Box
-              key={item.cp3}
-              w="100%"
-              bg="#fff"
-              boxShadow="md"
-              rounded="15"
-              overflow="hidden"
-              mb="2"
-              mr="2"
-              display="flex"
-              flexDirection="row"
-              justifyContent="space-around"
-            >
-              <Box
-                bg="teal.300"
-                w="0.5rem"
-                m="0"
-                p="0"
-              >
-              </Box>
-              <Flex w="100%" mt="2" mb="2" direction="column">
-                <Heading
-                  pr="4"
-                  pl="4"
-                  fontSize="25px"
-                  fontWeight="500"
-                >
-                  Valor Liquido
-                </Heading>
-                <Text
-                  pr="4"
-                  pl="4"
-                  fontSize="30px"
-                  fontWeight="500"
-                >
-                  {FormatCurrency(item.vl3)}
-                </Text>
-                <Text
-                  pr="4"
-                  pl="4"
-                  fontSize="15px"
-                  fontWeight="500"
-                >
-                  Mês anterior
-                </Text>
-                <Text
-                  pr="4"
-                  pl="4"
-                  display="flex"
-                  alignItems="center"
-                >
-                  {resultsBackMonth?.map(result => {
-                    return (
-                      `${FormatCurrency(result.liquido)}`
-                    )
-                  })}
-                  {resultsBackMonth?.map(result => {
-                    return (
-                      Number(item.vl3).toFixed(2) < Number(result.liquido).toFixed(2) ?
-                        <ArrowUpIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="green" />
-                        :
-                        <ArrowDownIcon key={item.cp1} w={5} h={5} m="0.5" p="0" color="red" />
-                    )
-                  })}
-                </Text>
-              </Flex>
-            </Box>
-          </Flex>
+            )
+          })
         )
       })}
     </Flex>

@@ -15,7 +15,7 @@ const Home: NextPage = () => {
         p="2"
       >
         <Flex
-          w="15%"
+          w="10%"
           h="100%"
           bg="#fff"
           rounded="15"
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         >
         </Flex>
         <Flex
-          w="85%"
+          w="90%"
           flexDir="column"
           ml="0"
           mt="0"

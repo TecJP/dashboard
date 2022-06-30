@@ -30,8 +30,8 @@ export function PessoalEscolaridade() {
   console.log(pessoalEscolaridade?.filter(item => item.Nome_Grafico === "Servidores Escolaridade Mas"));
 
   return (
-    <Flex bg="#fff" p="4" ml="1" flexDir="row" w="100%" h="100%" rounded="15" shadow="md" >
-      <TableContainer m="4">
+    <Flex bg="#fff" p="4" ml="1" flexDir="row" w={{ md: "35%", lg: "35%", xl: "30%" }} h="100%" rounded="15" shadow="md" >
+      <TableContainer w="100%" m="4">
         <Table size="sm" variant='striped' colorScheme='teal'>
           <TableCaption>Nível de Escolaridade Total</TableCaption>
           <Thead>
