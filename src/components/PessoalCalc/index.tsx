@@ -20,12 +20,12 @@ export function PessoalCalc() {
   const { pessoalCalc } = usePessoalCalc<Data[]>('/api/pessoal_calc');
   const date = new Date();
   const pessoalCalcFiltered = pessoalCalc?.filter(item => {
-    if (item.vl5 === (date.getMonth() + 2).toString()) {
+    if (item.vl5 === (date.getMonth() + 1).toString()) {
       return item;
     }
   });
   const pessoalCalcFilteredByBackMonth = pessoalCalc?.filter(item => {
-    if (item.vl5 === (date.getMonth() + 1).toString()) {
+    if (item.vl5 === (date.getMonth()).toString()) {
       return item;
     }
   });
@@ -36,6 +36,8 @@ export function PessoalCalc() {
       liquido: item.vl3,
     }
   });
+
+  console.log(pessoalCalcFiltered);
 
   return (
     <Flex

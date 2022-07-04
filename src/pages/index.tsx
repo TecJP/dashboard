@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <Container minW='100vw' minH='100vh' p="0" bg="gray.50" >
       <Flex
-        maxW="2000px"
+        maxW="100%"
         flexDir="row"
         h="100vh"
         p="2"
